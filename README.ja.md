@@ -11,7 +11,6 @@
 </p>
 
 <p align="center">
-  <a href="../../actions/workflows/build.yml"><img alt="Build" src="../../actions/workflows/build.yml/badge.svg"></a>
   <img alt="Windows 10/11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?logo=windows&logoColor=white">
   <img alt="Go" src="https://img.shields.io/badge/Go-%E6%A8%99%E6%BA%96%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%81%AE%E3%81%BF-00ADD8?logo=go&logoColor=white">
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green">
@@ -40,7 +39,7 @@
 | `nikke_check_ko.exe` | 韓国語版 |
 | `SHA256SUMS.txt` | ファイルが改ざんされていないか確認するハッシュ値 |
 
-Releasesのexeは**人がアップロードしたものではなく、GitHub Actionsがこのリポジトリのソースから直接ビルド**したものです。[このexeは信用できますか?](#-このexeは信用できますか) を参照してください。
+Releasesのexeは**このリポジトリのソースからそのままビルド**したもので、自分でビルドしても同じファイル(同じハッシュ)になります。[このexeは信用できますか?](#-このexeは信用できますか) を参照してください。
 
 > [!NOTE]
 > 署名されていないプログラムのため、**「WindowsによってPCが保護されました」** と表示されることがあります。**[詳細情報] → [実行]** を押してください。
@@ -158,7 +157,7 @@ NIKKEのフォルダーなしでチェックした場合や、感染の痕跡が
 
 このプログラムはブラウザーフォルダーの確認、レジストリの削除、hostsの変更など、見た目がマルウェアに似た処理を行うため、誤検知されることがあります。
 
-- ソースは公開されており、Releasesのexeは GitHub Actions が直接ビルドしています。
+- ソースは公開されており、Releasesのexeはこのソースからビルドしたものです。
 - 誤検知の場合は [Microsoftに報告](https://www.microsoft.com/en-us/wdsi/filesubmission) してください。(Incorrect detection を選択)
 - 心配な場合は [自分でビルド](#-自分でビルド) してお使いください。
 
@@ -198,11 +197,7 @@ v2.5.3以前の誤検知です。hostsで遮断するとWindowsがそのアド�
    ```powershell
    Get-FileHash .\nikke_check_ja.exe -Algorithm SHA256
    ```
-2. **ビルド元の確認**: Releasesのexeには、GitHubがこのリポジトリからビルドしたことの証明(attestation)が付いています。
-   ```powershell
-   gh attestation verify .\nikke_check_ja.exe --repo <所有者>/<リポジトリ>
-   ```
-3. **自分でビルド**: 下の方法でビルドすると、同じGoのバージョンなら同じexeができます。
+2. **自分でビルドして比較**: 下の方法でビルドすると、同じGoのバージョン(1.24.7)ならReleasesと**同じハッシュのexe**ができます。他人が作ったexeが心配な場合は、自分でビルドしたものを使ってください。
 
 ## 🧱 自分でビルド
 

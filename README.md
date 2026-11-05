@@ -11,7 +11,6 @@
 </p>
 
 <p align="center">
-  <a href="../../actions/workflows/build.yml"><img alt="Build" src="../../actions/workflows/build.yml/badge.svg"></a>
   <img alt="Windows 10/11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-0078D4?logo=windows&logoColor=white">
   <img alt="Go" src="https://img.shields.io/badge/Go-%ED%91%9C%EC%A4%80%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC%EB%A7%8C-00ADD8?logo=go&logoColor=white">
   <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green">
@@ -40,7 +39,7 @@
 | `nikke_check_ja.exe` | 일본어판 |
 | `SHA256SUMS.txt` | 파일이 바뀌지 않았는지 확인하는 해시값 |
 
-Releases의 exe는 **사람이 올린 게 아니라 GitHub Actions가 이 저장소의 소스로 직접 빌드**한 것입니다. [이 exe를 믿어도 되나요?](#-이-exe를-믿어도-되나요) 참고.
+Releases의 exe는 **이 저장소의 소스 그대로 빌드**한 것이며, 직접 빌드해도 같은 파일(같은 해시)이 나옵니다. [이 exe를 믿어도 되나요?](#-이-exe를-믿어도-되나요) 참고.
 
 > [!NOTE]
 > 서명되지 않은 프로그램이라 **"Windows의 PC 보호"** 창이 뜰 수 있습니다. **[추가 정보] → [실행]**을 누르면 됩니다.
@@ -158,7 +157,7 @@ Releases의 exe는 **사람이 올린 게 아니라 GitHub Actions가 이 저장
 
 이 프로그램은 브라우저 폴더 확인, 레지스트리 삭제, hosts 수정처럼 악성코드와 겉보기에 비슷한 일을 해서 오탐이 날 수 있습니다.
 
-- 소스가 공개되어 있고, Releases의 exe는 GitHub Actions가 직접 빌드합니다.
+- 소스가 공개되어 있고, Releases의 exe는 이 소스로 빌드한 것입니다.
 - 오탐이면 [Microsoft에 신고](https://www.microsoft.com/en-us/wdsi/filesubmission)해 주세요. (Incorrect detection 선택)
 - 걱정되면 [직접 빌드](#-직접-빌드)해서 쓰세요.
 
@@ -191,11 +190,7 @@ v2.5.3 이하의 오탐입니다. hosts로 차단하면 윈도우가 그 주소�
    ```powershell
    Get-FileHash .\nikke_check_ko.exe -Algorithm SHA256
    ```
-2. **빌드 출처 확인**: Releases의 exe는 GitHub가 이 저장소에서 빌드했다는 증명(attestation)이 붙어 있습니다.
-   ```powershell
-   gh attestation verify .\nikke_check_ko.exe --repo <소유자>/<저장소>
-   ```
-3. **직접 빌드**: 아래 방법으로 빌드하면 같은 Go 버전에서 같은 exe가 나옵니다.
+2. **직접 빌드해서 비교**: 아래 방법으로 빌드하면 같은 Go 버전(1.24.7)에서 Releases와 **같은 해시의 exe**가 나옵니다. 남이 만든 exe가 걱정되면 직접 빌드한 것을 쓰세요.
 
 ## 🧱 직접 빌드
 
